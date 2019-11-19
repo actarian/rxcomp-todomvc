@@ -4,7 +4,7 @@
 
 This is a demo app of the [RxComp](https://github.com/actarian/rxcomp) reactive component library.
 
-Built on top of [RxJs](https://github.com/ReactiveX/rxjs) it mimics the [Angular](https://angular.io/guide/practical-observable-usage) declarative syntax. 
+Built on top of [RxJs](https://github.com/ReactiveX/rxjs) it mimics the [Angular](https://angular.io/) declarative syntax. 
 
 If you like Angular declarative syntax but you just want go Vanilla, RxComp library come in useful.
 
@@ -28,7 +28,7 @@ ___
 
 ### Dependancies
 ```json
-"rxcomp": "1.0.0-alpha.2",
+"rxcomp": "1.0.0-alpha.3",
 "rxjs": "~6.5.3",
 ```
 
@@ -36,7 +36,7 @@ ___
 
 ```html
 <script src="https://unpkg.com/@reactivex/rxjs@6.5.3/dist/global/rxjs.umd.min.js"></script>
-<script src="https://unpkg.com/rxcomp@1.0.0-alpha.2/dist/rxcomp.min.js"></script>	
+<script src="https://unpkg.com/rxcomp@1.0.0-alpha.3/dist/rxcomp.min.js"></script>	
 ```
 
 ## Contributing

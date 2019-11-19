@@ -1,3 +1,9 @@
+/**
+ * @license todomvc v1.0.0-alpha.3
+ * (c) 2019 Luca Zampetti <lzampetti@gmail.com>
+ * License: MIT
+ */
+
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('rxcomp'), require('rxjs/operators'), require('rxjs')) :
   typeof define === 'function' && define.amd ? define('main', ['rxcomp', 'rxjs/operators', 'rxjs'], factory) :
@@ -187,13 +193,16 @@
     _proto.onInit = function onInit() {
       var _this = this;
 
-      var context = rxcomp.Module.getContext(this);
-      this.input = context.node.querySelector('.control--text');
-      this.items = [];
+      // context
+      var context = rxcomp.Module.getContext(this); // input
+
+      this.input = context.node.querySelector('.control--text'); // items
+
+      this.items = []; // store service
+
       this.store$ = StoreService.get$();
       this.store$.pipe(operators.takeUntil(this.unsubscribe$)).subscribe(function (items) {
-        // console.log('AppComponent.store$', items);
-        _this.items = items;
+        _this.items = items; // onpush change detection strategy
 
         _this.pushChanges();
       });
