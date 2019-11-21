@@ -1,5 +1,5 @@
 /**
- * @license todomvc v1.0.0-alpha.3
+ * @license todomvc v1.0.0-alpha.4
  * (c) 2019 Luca Zampetti <lzampetti@gmail.com>
  * License: MIT
  */
@@ -14,6 +14,52 @@
     subClass.prototype = Object.create(superClass.prototype);
     subClass.prototype.constructor = subClass;
     subClass.__proto__ = superClass;
+  }
+
+  var colors = [{
+    hex: '#ffffff',
+    background: '#ffffff',
+    foreground: '#003adc',
+    accent: '#212121'
+  }, {
+    hex: '#212121',
+    background: '#212121',
+    foreground: '#ffffff',
+    accent: '#003adc'
+  }, {
+    hex: '#ffffff',
+    background: '#ffffff',
+    foreground: '#212121',
+    accent: '#003adc'
+  }, {
+    hex: '#003adc',
+    background: '#003adc',
+    foreground: '#ffffff',
+    accent: '#212121'
+  }];
+  function color(index, alpha) {
+    return hexToRgb(colors[index % colors.length].hex, alpha);
+  }
+  function background(index, alpha) {
+    console.log(index);
+    return hexToRgb(colors[index % colors.length].background, alpha);
+  }
+  function foreground(index, alpha) {
+    return hexToRgb(colors[index % colors.length].foreground, alpha);
+  }
+  function accent(index, alpha) {
+    return hexToRgb(colors[index % colors.length].accent, alpha);
+  }
+  function hexToRgb(hex, a) {
+    var r = parseInt(hex.slice(1, 3), 16);
+    var g = parseInt(hex.slice(3, 5), 16);
+    var b = parseInt(hex.slice(5, 7), 16);
+
+    if (a) {
+      return "rgba(" + r + "," + g + "," + b + "," + a + ")";
+    } else {
+      return "rgb(" + r + "," + g + "," + b + ")";
+    }
   }
 
   var LocalStorageService =
@@ -132,8 +178,16 @@
       }
 
       this.store$ = new rxjs.BehaviorSubject(items);
-      return this.store$.pipe(operators.delay(1) // simulate http
-      );
+      return this.store$.pipe(operators.delay(1), // simulate http
+      operators.map(function (items) {
+        items.forEach(function (item, i) {
+          var index = items.length - 1 - i;
+          item.background = background(index);
+          item.foreground = foreground(index);
+          item.accent = accent(index);
+        });
+        return items;
+      }));
     };
 
     StoreService.add$ = function add$(patch) {
@@ -278,32 +332,6 @@
     name: 'date'
   };
 
-  var colors = [{
-    hex: '#073B4C'
-  }, {
-    hex: '#EF476F'
-  }, {
-    hex: '#1CCC9D'
-  }, {
-    hex: '#118AB2'
-  }, {
-    hex: '#EFC156'
-  }];
-  function color(index, alpha) {
-    return hexToRgb(colors[index % colors.length].hex, alpha);
-  }
-  function hexToRgb(hex, a) {
-    var r = parseInt(hex.slice(1, 3), 16);
-    var g = parseInt(hex.slice(3, 5), 16);
-    var b = parseInt(hex.slice(5, 7), 16);
-
-    if (a) {
-      return "rgba(" + r + "," + g + "," + b + "," + a + ")";
-    } else {
-      return "rgb(" + r + "," + g + "," + b + ")";
-    }
-  }
-
   var TodoItemComponent =
   /*#__PURE__*/
   function (_Component) {
@@ -320,6 +348,9 @@
       // console.log('onChanges', changes);
       this.backgroundColor = color(this.item.id, 0.15);
       this.color = color(this.item.id);
+      this.background = background(changes.index);
+      this.foreground = foreground(changes.index);
+      this.accent = accent(changes.index);
     } // onView() {}
     // onDestroy() {}
     ;
@@ -343,13 +374,13 @@
 
     /*
     template: // html // `
-    	<button type="button" class="btn--toggle" [style]="{ color: color }" (click)="onToggle(item)">
-    		<i class="icon--check" *if="item.done"></i>
-    		<i class="icon--circle" *if="!item.done"></i>
-    	</button>
-    	<div class="title" [style]="{ color: color }" [innerHTML]="item.name"></div>
-    	<div class="date" [style]="{ background: backgroundColor, color: color }" [innerHTML]="item.date | date : 'en-US' : { month: 'short', day: '2-digit', year: 'numeric' }"></div>
-    	<button type="button" class="btn--remove" [style]="{ color: color }" (click)="onRemove(item)"><i class="icon--remove"></i></button>
+    	<button type="button" class="btn--toggle" (click)="onToggle(item)">
+               <i class="icon--check" *if="item.done"></i>
+               <i class="icon--circle" *if="!item.done"></i>
+               <div class="title" [innerHTML]="item.name"></div>
+           </button>
+           <div class="date" [style]="{ background: backgroundColor, color: color }" [innerHTML]="item.date | date : 'en-US' : { month: 'short', day: '2-digit', year: 'numeric' }"></div>
+           <button type="button" class="btn--remove" (click)="onRemove(item)"><i class="icon--remove"></i></button>
     `,
     */
 

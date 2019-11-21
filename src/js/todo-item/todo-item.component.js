@@ -1,5 +1,5 @@
 import { Component } from 'rxcomp';
-import { color } from '../colors/colors';
+import { color, background, foreground, accent } from '../colors/colors';
 
 export default class TodoItemComponent extends Component {
 
@@ -9,6 +9,9 @@ export default class TodoItemComponent extends Component {
 		// console.log('onChanges', changes);
 		this.backgroundColor = color(this.item.id, 0.15);
 		this.color = color(this.item.id);
+		this.background = background(changes.index);
+		this.foreground = foreground(changes.index);
+		this.accent = accent(changes.index);
 	}
 
 	// onView() {}
@@ -34,13 +37,13 @@ TodoItemComponent.meta = {
 	// template syntax example
 	/*
 	template: // html // `
-		<button type="button" class="btn--toggle" [style]="{ color: color }" (click)="onToggle(item)">
-			<i class="icon--check" *if="item.done"></i>
-			<i class="icon--circle" *if="!item.done"></i>
-		</button>
-		<div class="title" [style]="{ color: color }" [innerHTML]="item.name"></div>
-		<div class="date" [style]="{ background: backgroundColor, color: color }" [innerHTML]="item.date | date : 'en-US' : { month: 'short', day: '2-digit', year: 'numeric' }"></div>
-		<button type="button" class="btn--remove" [style]="{ color: color }" (click)="onRemove(item)"><i class="icon--remove"></i></button>
+		<button type="button" class="btn--toggle" (click)="onToggle(item)">
+            <i class="icon--check" *if="item.done"></i>
+            <i class="icon--circle" *if="!item.done"></i>
+            <div class="title" [innerHTML]="item.name"></div>
+        </button>
+        <div class="date" [style]="{ background: backgroundColor, color: color }" [innerHTML]="item.date | date : 'en-US' : { month: 'short', day: '2-digit', year: 'numeric' }"></div>
+        <button type="button" class="btn--remove" (click)="onRemove(item)"><i class="icon--remove"></i></button>
 	`,
 	*/
 };

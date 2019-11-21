@@ -1,5 +1,6 @@
 import { BehaviorSubject, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
+import { background, foreground, accent } from '../colors/colors';
 import LocalStorageService from '../local-storage/local-storage.service';
 
 export default class StoreService {
@@ -24,7 +25,16 @@ export default class StoreService {
 		}
 		this.store$ = new BehaviorSubject(items);
 		return this.store$.pipe(
-			delay(1) // simulate http
+            delay(1), // simulate http
+            map(items => {
+                items.forEach((item, i) => {
+                    const index = items.length - 1 - i;
+                    item.background = background(index);
+                    item.foreground = foreground(index);
+                    item.accent = accent(index);
+                });
+                return items;
+            })
 		);
 	}
 
