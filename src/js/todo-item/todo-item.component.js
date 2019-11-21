@@ -1,5 +1,5 @@
 import { Component } from 'rxcomp';
-import { color, background, foreground, accent } from '../colors/colors';
+import { accent, background, foreground } from '../colors/colors';
 
 export default class TodoItemComponent extends Component {
 
@@ -7,11 +7,9 @@ export default class TodoItemComponent extends Component {
 
 	onChanges(changes) {
 		// console.log('onChanges', changes);
-		this.backgroundColor = color(this.item.id, 0.15);
-		this.color = color(this.item.id);
-		this.background = background(changes.index);
-		this.foreground = foreground(changes.index);
-		this.accent = accent(changes.index);
+		this.background = background(this.item.id);
+		this.foreground = foreground(this.item.id);
+		this.accent = accent(this.item.id);
 	}
 
 	// onView() {}

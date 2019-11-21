@@ -1,26 +1,23 @@
 .group--form {
 	display: flex;
-	margin: 20px 0;
-	padding: 8px 12px;
-	border: 2px solid rgba(17, 138, 178, 0.2);
-	border-radius: 8px;
+	padding: 10px 20px;
 }
 
 .control--text {
 	width: 100%;
 	margin: 0;
-	padding: 0;
-	font-size: 20px;
+	padding: 0 20px 0 0;
+	font-size: 28px;
 	font-weight: 800;
 	background: none;
 	border: none;
 	outline: none;
-	color: rgba(17, 138, 178, 1);
+	color: $foreground;
 
 	&::placeholder {
-		font-size: 20px;
+		font-size: 28px;
 		font-weight: 800;
-		color: rgba(17, 138, 178, 0.2);
+		color: rgba($foreground, 0.2);
 	}
 }
 

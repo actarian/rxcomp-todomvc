@@ -1,6 +1,5 @@
 import { BehaviorSubject, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
-import { background, foreground, accent } from '../colors/colors';
+import { delay } from 'rxjs/operators';
 import LocalStorageService from '../local-storage/local-storage.service';
 
 export default class StoreService {
@@ -17,24 +16,17 @@ export default class StoreService {
 		let items = LocalStorageService.get('items');
 		if (!items) {
 			items = [
-				{ id: 3, name: 'cookies', date: new Date(Date.now()) },
-				{ id: 2, name: 'pizza', date: new Date(2019, 3, 22, 12) },
-				{ id: 1, name: 'bread', date: new Date(2019, 0, 6, 12) },
+				{ id: 5, name: 'Cookies', date: new Date(Date.now()) },
+				{ id: 4, name: 'Pizza', date: new Date(2019, 4, 4, 12) },
+				{ id: 3, name: 'Pasta', date: new Date(2019, 3, 22, 12) },
+				{ id: 2, name: 'Bread', date: new Date(2019, 0, 6, 12) },
+				{ id: 1, name: 'Ham', date: new Date(2018, 11, 30, 12) },
 			];
 			LocalStorageService.set('items', items);
 		}
 		this.store$ = new BehaviorSubject(items);
 		return this.store$.pipe(
-            delay(1), // simulate http
-            map(items => {
-                items.forEach((item, i) => {
-                    const index = items.length - 1 - i;
-                    item.background = background(index);
-                    item.foreground = foreground(index);
-                    item.accent = accent(index);
-                });
-                return items;
-            })
+			delay(1) // simulate http
 		);
 	}
 

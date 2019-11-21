@@ -16,52 +16,6 @@
     subClass.__proto__ = superClass;
   }
 
-  var colors = [{
-    hex: '#ffffff',
-    background: '#ffffff',
-    foreground: '#003adc',
-    accent: '#212121'
-  }, {
-    hex: '#212121',
-    background: '#212121',
-    foreground: '#ffffff',
-    accent: '#003adc'
-  }, {
-    hex: '#ffffff',
-    background: '#ffffff',
-    foreground: '#212121',
-    accent: '#003adc'
-  }, {
-    hex: '#003adc',
-    background: '#003adc',
-    foreground: '#ffffff',
-    accent: '#212121'
-  }];
-  function color(index, alpha) {
-    return hexToRgb(colors[index % colors.length].hex, alpha);
-  }
-  function background(index, alpha) {
-    console.log(index);
-    return hexToRgb(colors[index % colors.length].background, alpha);
-  }
-  function foreground(index, alpha) {
-    return hexToRgb(colors[index % colors.length].foreground, alpha);
-  }
-  function accent(index, alpha) {
-    return hexToRgb(colors[index % colors.length].accent, alpha);
-  }
-  function hexToRgb(hex, a) {
-    var r = parseInt(hex.slice(1, 3), 16);
-    var g = parseInt(hex.slice(3, 5), 16);
-    var b = parseInt(hex.slice(5, 7), 16);
-
-    if (a) {
-      return "rgba(" + r + "," + g + "," + b + "," + a + ")";
-    } else {
-      return "rgb(" + r + "," + g + "," + b + ")";
-    }
-  }
-
   var LocalStorageService =
   /*#__PURE__*/
   function () {
@@ -162,32 +116,32 @@
 
       if (!items) {
         items = [{
-          id: 3,
-          name: 'cookies',
+          id: 5,
+          name: 'Cookies',
           date: new Date(Date.now())
         }, {
-          id: 2,
-          name: 'pizza',
+          id: 4,
+          name: 'Pizza',
+          date: new Date(2019, 4, 4, 12)
+        }, {
+          id: 3,
+          name: 'Pasta',
           date: new Date(2019, 3, 22, 12)
         }, {
-          id: 1,
-          name: 'bread',
+          id: 2,
+          name: 'Bread',
           date: new Date(2019, 0, 6, 12)
+        }, {
+          id: 1,
+          name: 'Ham',
+          date: new Date(2018, 11, 30, 12)
         }];
         LocalStorageService.set('items', items);
       }
 
       this.store$ = new rxjs.BehaviorSubject(items);
-      return this.store$.pipe(operators.delay(1), // simulate http
-      operators.map(function (items) {
-        items.forEach(function (item, i) {
-          var index = items.length - 1 - i;
-          item.background = background(index);
-          item.foreground = foreground(index);
-          item.accent = accent(index);
-        });
-        return items;
-      }));
+      return this.store$.pipe(operators.delay(1) // simulate http
+      );
     };
 
     StoreService.add$ = function add$(patch) {
@@ -332,6 +286,48 @@
     name: 'date'
   };
 
+  var colors = [{
+    hex: '#ffffff',
+    background: '#ffffff',
+    foreground: '#003adc',
+    accent: '#212121'
+  }, {
+    hex: '#212121',
+    background: '#212121',
+    foreground: '#ffffff',
+    accent: '#003adc'
+  }, {
+    hex: '#ffffff',
+    background: '#ffffff',
+    foreground: '#212121',
+    accent: '#003adc'
+  }, {
+    hex: '#003adc',
+    background: '#003adc',
+    foreground: '#ffffff',
+    accent: '#212121'
+  }];
+  function background(index, alpha) {
+    return hexToRgb(colors[index % colors.length].background, alpha);
+  }
+  function foreground(index, alpha) {
+    return hexToRgb(colors[index % colors.length].foreground, alpha);
+  }
+  function accent(index, alpha) {
+    return hexToRgb(colors[index % colors.length].accent, alpha);
+  }
+  function hexToRgb(hex, a) {
+    var r = parseInt(hex.slice(1, 3), 16);
+    var g = parseInt(hex.slice(3, 5), 16);
+    var b = parseInt(hex.slice(5, 7), 16);
+
+    if (a) {
+      return "rgba(" + r + "," + g + "," + b + "," + a + ")";
+    } else {
+      return "rgb(" + r + "," + g + "," + b + ")";
+    }
+  }
+
   var TodoItemComponent =
   /*#__PURE__*/
   function (_Component) {
@@ -346,11 +342,9 @@
     // onInit() {}
     _proto.onChanges = function onChanges(changes) {
       // console.log('onChanges', changes);
-      this.backgroundColor = color(this.item.id, 0.15);
-      this.color = color(this.item.id);
-      this.background = background(changes.index);
-      this.foreground = foreground(changes.index);
-      this.accent = accent(changes.index);
+      this.background = background(this.item.id);
+      this.foreground = foreground(this.item.id);
+      this.accent = accent(this.item.id);
     } // onView() {}
     // onDestroy() {}
     ;

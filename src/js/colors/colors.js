@@ -23,7 +23,6 @@ export function color(index, alpha) {
 }
 
 export function background(index, alpha) {
-	console.log(index);
 	return hexToRgb(colors[index % colors.length].background, alpha);
 }
 
