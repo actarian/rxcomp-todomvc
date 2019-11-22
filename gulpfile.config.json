@@ -28,7 +28,7 @@
 		"server": {
 			"src": "./docs",
 			"path": "/rxcomp-todomvc/",
-			"host": "0.0.0.0",
+			"host": "localhost",
 			"port": 40998
 		}
 	}
