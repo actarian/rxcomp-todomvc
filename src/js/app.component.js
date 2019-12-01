@@ -1,4 +1,4 @@
-import { Component, Module } from 'rxcomp';
+import { Component, getContext } from 'rxcomp';
 import { takeUntil } from 'rxjs/operators';
 import StoreService from './store/store.service';
 
@@ -6,7 +6,7 @@ export default class AppComponent extends Component {
 
 	onInit() {
 		// context
-		const context = Module.getContext(this);
+		const context = getContext(this);
 		// input
 		this.input = context.node.querySelector('.control--text');
 		// items
@@ -23,7 +23,7 @@ export default class AppComponent extends Component {
 	}
 
 	onView() {
-		const context = Module.getContext(this);
+		const context = getContext(this);
 		// console.log('AppComponent.onView', context.node);
 	}
 

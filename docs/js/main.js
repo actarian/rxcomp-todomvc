@@ -1,5 +1,5 @@
 /**
- * @license todomvc v1.0.0-alpha.5
+ * @license todomvc v1.0.0-alpha.6
  * (c) 2019 Luca Zampetti <lzampetti@gmail.com>
  * License: MIT
  */
@@ -202,7 +202,7 @@
       var _this = this;
 
       // context
-      var context = rxcomp.Module.getContext(this); // input
+      var context = rxcomp.getContext(this); // input
 
       this.input = context.node.querySelector('.control--text'); // items
 
@@ -217,7 +217,7 @@
     };
 
     _proto.onView = function onView() {
-      var context = rxcomp.Module.getContext(this); // console.log('AppComponent.onView', context.node);
+      var context = rxcomp.getContext(this); // console.log('AppComponent.onView', context.node);
     } // onChanges() {}
     // onDestroy() {}
     ;
@@ -261,8 +261,12 @@
 
   var DatePipe =
   /*#__PURE__*/
-  function () {
-    function DatePipe() {}
+  function (_Pipe) {
+    _inheritsLoose(DatePipe, _Pipe);
+
+    function DatePipe() {
+      return _Pipe.apply(this, arguments) || this;
+    }
 
     DatePipe.transform = function transform(value, locale, options) {
       if (locale === void 0) {
@@ -281,7 +285,7 @@
     };
 
     return DatePipe;
-  }();
+  }(rxcomp.Pipe);
   DatePipe.meta = {
     name: 'date'
   };
@@ -380,10 +384,23 @@
 
   };
 
-  rxcomp.Module.use({
-    factories: [rxcomp.ClassDirective, rxcomp.EventDirective, rxcomp.ForStructure, rxcomp.IfStructure, rxcomp.InnerHtmlDirective, rxcomp.StyleDirective, TodoItemComponent],
-    pipes: [DatePipe, rxcomp.JsonPipe],
+  var AppModule =
+  /*#__PURE__*/
+  function (_Module) {
+    _inheritsLoose(AppModule, _Module);
+
+    function AppModule() {
+      return _Module.apply(this, arguments) || this;
+    }
+
+    return AppModule;
+  }(rxcomp.Module);
+  AppModule.meta = {
+    imports: [rxcomp.CoreModule],
+    declarations: [TodoItemComponent, DatePipe],
     bootstrap: AppComponent
-  });
+  };
+
+  rxcomp.Browser.bootstrap(AppModule);
 
 })));
