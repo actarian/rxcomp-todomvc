@@ -9,8 +9,8 @@
 	<meta name="Content-Language" content="it" />
 	<meta name="robots" content="noindex,nofollow" />
 	<title>TodoMvc</title>
-	<link rel="stylesheet" href="css/main.min.css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.min.css" />
 </head>
 
 <body class="page--todomvc">
@@ -29,20 +29,22 @@
 			<button type="button" class="btn--add" [class]="{ disabled: !input.value }" (click)="onAddItem($event)"><i class="icon--add"></i></button>
 		</div>
 		<ul class="list">
-			<li class="list__item" *for="let item of items" [class]="{ done: item.done }" [style]="{ background: background, color: foreground, '--accent': accent }" todo-item-component [item]="item" (toggle)="onToggleItem($event)" (remove)="onRemoveItem($event)">
-				<button type="button" class="btn--toggle" (click)="onToggle(item)">
-					<div class="title" [innerHTML]="item.name"></div>
-					<div class="date" [innerHTML]="item.date | date : 'en-US' : { month: 'short', day: '2-digit', year: 'numeric' }"></div>
-				</button>
-				<button type="button" class="btn--remove" (click)="onRemove(item)">
-					<i class="icon--remove"></i>
-				</button>
+			<li class="list__item" *for="let item of items" [class]="{ done: item.done }" todo-item-component [item]="item" (toggle)="onToggleItem($event)" (remove)="onRemoveItem($event)">
+				<div class="content" [style]="{ background: background, color: foreground, '--accent': accent }">
+					<button type="button" class="btn--toggle" (click)="onToggle(item)">
+						<div class="title" [innerHTML]="item.name"></div>
+						<div class="date" [innerHTML]="item.date | date : 'en-US' : { month: 'short', day: '2-digit', year: 'numeric' }"></div>
+					</button>
+					<button type="button" class="btn--remove" (click)="onRemove(item)">
+						<i class="icon--remove"></i>
+					</button>
+				</div>
 			</li>
 		</ul>
 	</main>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es5%2CArray.prototype.find%2CObject.assign"></script>
 	<script src="https://unpkg.com/@reactivex/rxjs@6.5.3/dist/global/rxjs.umd.min.js"></script>
-	<script src="https://unpkg.com/rxcomp@1.0.0-alpha.6/dist/rxcomp.min.js"></script>
+	<script src="https://unpkg.com/rxcomp@1.0.0-alpha.7/dist/rxcomp.min.js"></script>
 	<script src="js/main.min.js"></script>
 </body>
 
