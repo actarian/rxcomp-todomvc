@@ -8,8 +8,8 @@ Built on top of [RxJs](https://github.com/ReactiveX/rxjs) it mimics the [Angular
 
 If you like Angular declarative syntax but you just want go Vanilla, RxComp library come in useful.
 
-> [TodoMvc RxComp demo](https://actarian.github.io/rxcomp-todomvc/)
-
+> [TodoMvc Demo](https://actarian.github.io/rxcomp-todomvc/)  
+> [TodoMvc Codepen](https://codepen.io/actarian/pen/QWWRZON?editors=0010)  
 > [RxComp Github Project](https://github.com/actarian/rxcomp)  
 
 ___
