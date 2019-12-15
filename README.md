@@ -28,7 +28,7 @@ ___
 
 ### Dependancies
 ```json
-"rxcomp": "1.0.0-alpha.12",
+"rxcomp": "1.0.0-alpha.14",
 "rxjs": "~6.5.3",
 ```
 
@@ -36,7 +36,7 @@ ___
 
 ```html
 <script src="https://unpkg.com/@reactivex/rxjs@6.5.3/dist/global/rxjs.umd.min.js"></script>
-<script src="https://unpkg.com/rxcomp@1.0.0-alpha.12/dist/rxcomp.min.js"></script>	
+<script src="https://unpkg.com/rxcomp@1.0.0-alpha.14/dist/rxcomp.min.js"></script>	
 ```
 
 ## Contributing
