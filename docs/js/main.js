@@ -1,5 +1,5 @@
 /**
- * @license todomvc v1.0.0-alpha.14
+ * @license todomvc v1.0.0-beta.1
  * (c) 2019 Luca Zampetti <lzampetti@gmail.com>
  * License: MIT
  */
