@@ -28,15 +28,15 @@ ___
 
 ### Dependancies
 ```json
-"rxcomp": "1.0.0-beta.1",
-"rxjs": "~6.5.3",
+"rxcomp": "1.0.0-beta.5",
+"rxjs": "~6.5.4",
 ```
 
 ### CDN
 
 ```html
-<script src="https://unpkg.com/@reactivex/rxjs@6.5.3/dist/global/rxjs.umd.min.js"></script>
-<script src="https://unpkg.com/rxcomp@1.0.0-beta.1/dist/rxcomp.min.js"></script>	
+<script src="https://unpkg.com/@reactivex/rxjs@6.5.4/dist/global/rxjs.umd.min.js"></script>
+<script src="https://unpkg.com/rxcomp@1.0.0-beta.5/dist/rxcomp.min.js"></script>	
 ```
 
 ## Contributing
