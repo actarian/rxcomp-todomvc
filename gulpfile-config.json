@@ -1,0 +1,34 @@
+﻿{
+  "targets": {
+    "browser": {
+      "compile": [
+        {
+          "input": "src/css/main.scss",
+          "output": "docs/css/main.css",
+          "minify": true
+        },
+        {
+          "input": "src/js/main.js",
+          "output": {
+            "file": "docs/js/main.js",
+            "format": "iife"
+          },
+          "globals": {
+            "rxjs": "rxjs",
+            "rxjs/operators": "rxjs.operators"
+          },
+          "minify": true
+        }
+      ],
+      "bundle": []
+    }
+  },
+  "server": {
+    "root": "./docs",
+    "path": "/rxcomp-todomvc/",
+    "host": "localhost",
+    "port": 40998,
+    "log": false
+  },
+  "tfs": false
+}
